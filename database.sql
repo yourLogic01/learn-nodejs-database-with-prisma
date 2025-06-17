@@ -32,3 +32,21 @@ INSERT into products (id, name, price, stock, category) VALUES
 ('P0003', 'C', 3000, 300, 'K3'),
 ('P0004', 'D', 4000, 400, 'K4'),
 ('P0005', 'E', 5000, 500, 'K5');
+
+CREATE TABLE categories (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id)
+) engine innodb;
+
+CREATE TABLE wallet (
+    id VARCHAR(100) NOT NULL,
+    balance INT NOT NULL,
+    customer_id VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id),
+
+    constraint wallet_customer_id_fk FOREIGN KEY (customer_id) REFERENCES customers (id),
+    constraint wallet_customer_id_unique unique (customer_id)
+) engine innodb;
+
+SELECT * FROM wallet
