@@ -50,3 +50,36 @@ CREATE TABLE wallet (
 ) engine innodb;
 
 SELECT * FROM wallet
+
+CREATE TABLE comments (
+    id INT NOT NULL AUTO_INCREMENT,
+    customer_id VARCHAR(100) NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    description TEXT,
+    PRIMARY KEY (id),
+
+    constraint comments_customer_id_fk FOREIGN KEY (customer_id) REFERENCES customers (id)
+) engine innodb;
+
+INSERT INTO comments(customer_id, title, description) VALUES
+('maulana', 'Comment 1', 'Belajar NodeJS dan Prisma'),
+('maulana', 'Comment 2', 'Sample comment'),
+('asyifa', 'Comment 1', 'Belajar NodeJS dan Prisma asik'),
+('asyifa', 'Comment 2', 'Sample comment asik');
+
+CREATE TABLE likes (
+    customer_id VARCHAR(100) NOT NULL,
+    product_id VARCHAR(100) NOT NULL,
+    PRIMARY KEY (customer_id, product_id),
+
+    constraint likes_customer_id_fk FOREIGN KEY (customer_id) REFERENCES customers (id),
+    constraint likes_product_id_fk FOREIGN KEY (product_id) REFERENCES products (id)
+)engine innodb;
+CREATE TABLE _loves (
+    A VARCHAR(100) NOT NULL,
+    B VARCHAR(100) NOT NULL,
+    PRIMARY KEY (A, B),
+
+    constraint customer_loves_fk FOREIGN KEY (A) REFERENCES customers (id),
+    constraint product_loves_fk FOREIGN KEY (B) REFERENCES products (id)
+)engine innodb;
